@@ -126,7 +126,7 @@
     .hle-header { padding: 0 6% 24px; display: flex; justify-content: space-between; align-items: center; }
     .hle-left { display: flex; align-items: center; gap: 12px; }
     .hle-line { width: 28px; height: 1px; background: var(--text3); }
-    .hle-label { font-size: 13px; font-weight: 500; color: var(--text3); letter-spacing: 0.04em; }
+    .hle-label { font-size: 13px; font-weight: 700; color: var(--o1); letter-spacing: 0.04em; }
     .hle-nav { display: flex; align-items: center; gap: 16px; }
     .hle-count { font-family: var(--mono); font-size: 12px; color: var(--text3); min-width: 40px; text-align: center; }
     .hle-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--bg3); border: 1px solid var(--border); color: var(--text2); font-size: 15px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.18s; font-family: var(--sans); }
@@ -277,8 +277,21 @@
     .d1 { transition-delay: 0.08s; } .d2 { transition-delay: 0.17s; }
     .d3 { transition-delay: 0.26s; } .d4 { transition-delay: 0.35s; }
 
+    /* HOW I WORK */
+    .hw-grid { display: grid; grid-template-columns: repeat(5,1fr); position: relative; }
+    .hw-grid::before { content: ''; position: absolute; top: 19px; left: 10%; right: 10%; height: 1px; background: linear-gradient(to right, transparent, var(--border) 10%, var(--border) 90%, transparent); pointer-events: none; }
+    .hstep { padding: 0 14px; display: flex; flex-direction: column; }
+    .hstep-num { width: 40px; height: 40px; border-radius: 50%; background: var(--bg3); border: 1px solid rgba(255,107,53,0.28); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 12px; font-weight: 600; color: var(--o1); margin-bottom: 20px; position: relative; z-index: 1; flex-shrink: 0; }
+    .hstep-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 8px; letter-spacing: -0.01em; }
+    .hstep-desc { font-size: 12px; color: var(--text2); line-height: 1.65; margin-bottom: 16px; flex: 1; }
+    .hstep-icons { display: flex; gap: 7px; flex-wrap: wrap; align-items: center; }
+    .hstep-icon { width: 30px; height: 30px; border-radius: 8px; overflow: hidden; background: var(--bg3); border: 1px solid var(--border); flex-shrink: 0; }
+    .hstep-icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
     /* RESPONSIVE */
     @media (max-width: 1100px) {
+      .hw-grid { grid-template-columns: repeat(3,1fr); gap: 24px; }
+      .hw-grid::before { display: none; }
       .srv-grid { grid-template-columns: repeat(2,1fr); }
       .ben-grid { grid-template-columns: repeat(2,1fr); }
       .proj-grid { grid-template-columns: 1fr; }
@@ -289,6 +302,12 @@
       .footer-brand { grid-column: span 2; }
     }
     @media (max-width: 768px) {
+      .hw-grid { grid-template-columns: 1fr; gap: 0; }
+      .hw-grid::before { display: none; }
+      .hstep { padding: 0 0 0 48px; margin-bottom: 32px; position: relative; border-left: 1px solid var(--border); margin-left: 20px; padding-bottom: 32px; }
+      .hstep:last-child { border-left: none; margin-bottom: 0; }
+      .hstep-num { position: absolute; left: -20px; top: 0; margin-bottom: 0; }
+      .hstep-title { margin-top: 8px; }
       .hero-inner { grid-template-columns: 1fr; grid-template-rows: auto auto auto; column-gap: 0; row-gap: 28px; }
       .hero-text-top { grid-column: 1; grid-row: 1; }
       .hero-img-side { grid-column: 1; grid-row: 2; }
@@ -384,6 +403,9 @@
       <div class="mitem"><img src="assets/ArtList.jpg"           class="logo-img" alt="Artlist"></div>
       <div class="mitem"><img src="assets/MagnificLogo.png"      class="logo-img" alt="Magnific"></div>
       <div class="mitem"><img src="assets/NanoBanana2.webp"        class="logo-img" alt="NanoBanana"></div>
+      <div class="mitem"><img src="assets/NotionLogo.png"        class="logo-img" alt="Notion"></div>
+      <div class="mitem"><img src="assets/FrameIO.png"           class="logo-img" alt="Frame.io"></div>
+      <div class="mitem"><img src="assets/HiggsfieldLogo.png"    class="logo-img" alt="Higgsfield"></div>
       <!-- duplicate for seamless loop -->
       <div class="mitem"><img src="assets/Premiere.png"          class="logo-img" alt="Premiere Pro"></div>
       <div class="mitem"><img src="assets/AfterEffects.png"      class="logo-img" alt="After Effects"></div>
@@ -394,9 +416,77 @@
       <div class="mitem"><img src="assets/ArtList.jpg"           class="logo-img" alt="Artlist"></div>
       <div class="mitem"><img src="assets/MagnificLogo.png"      class="logo-img" alt="Magnific"></div>
       <div class="mitem"><img src="assets/NanoBanana2.webp"        class="logo-img" alt="NanoBanana"></div>
+      <div class="mitem"><img src="assets/NotionLogo.png"        class="logo-img" alt="Notion"></div>
+      <div class="mitem"><img src="assets/FrameIO.png"           class="logo-img" alt="Frame.io"></div>
+      <div class="mitem"><img src="assets/HiggsfieldLogo.png"    class="logo-img" alt="Higgsfield"></div>
     </div>
   </div>
 </div>
+
+<!-- HOW I WORK -->
+<section class="sec sec-alt" id="process">
+  <div class="inner">
+    <div class="sec-head rev">
+      <div class="eyebrow">Process</div>
+      <h2 class="sec-title">How I work</h2>
+      <p class="sec-sub">A clear, structured workflow from the first call to final delivery.</p>
+    </div>
+    <div class="hw-grid">
+
+      <div class="hstep rev d1">
+        <div class="hstep-num">01</div>
+        <div class="hstep-title">Onboarding</div>
+        <div class="hstep-desc">Initial call with a brief to define your visual brand guide, content plan, references, goals, and deadlines.</div>
+        <div class="hstep-icons">
+          <div class="hstep-icon"><img src="assets/GoogleMeet.png" alt="Google Meet"></div>
+          <div class="hstep-icon"><img src="assets/Fathom.png" alt="Fathom"></div>
+        </div>
+      </div>
+
+      <div class="hstep rev d2">
+        <div class="hstep-num">02</div>
+        <div class="hstep-title">Assets upload</div>
+        <div class="hstep-desc">You upload the raw footage and files to a shared Google Drive folder — organized and ready to work with.</div>
+        <div class="hstep-icons">
+          <div class="hstep-icon"><img src="assets/GoogleDrive.png" alt="Google Drive"></div>
+        </div>
+      </div>
+
+      <div class="hstep rev d3">
+        <div class="hstep-num">03</div>
+        <div class="hstep-title">Professional editing</div>
+        <div class="hstep-desc">I receive the material and edit it professionally, applying everything we discussed — style, rhythm, branding, and hooks.</div>
+        <div class="hstep-icons">
+          <div class="hstep-icon"><img src="assets/Premiere.png" alt="Premiere Pro"></div>
+          <div class="hstep-icon"><img src="assets/AfterEffects.png" alt="After Effects"></div>
+        </div>
+      </div>
+
+      <div class="hstep rev d4">
+        <div class="hstep-num">04</div>
+        <div class="hstep-title">Review &amp; feedback</div>
+        <div class="hstep-desc">You review the edit and leave comments directly on the timeline. We refine together until it's exactly right.</div>
+        <div class="hstep-icons">
+          <div class="hstep-icon"><img src="assets/FrameIO.png" alt="Frame.io"></div>
+        </div>
+      </div>
+
+      <div class="hstep rev d4">
+        <div class="hstep-num">05</div>
+        <div class="hstep-title">Delivery &amp; publish</div>
+        <div class="hstep-desc">Clean files delivered in every required format, optimized and ready to go live across all your platforms.</div>
+        <div class="hstep-icons">
+          <div class="hstep-icon"><img src="assets/IG.png" alt="Instagram"></div>
+          <div class="hstep-icon"><img src="assets/TikTok.webp" alt="TikTok"></div>
+          <div class="hstep-icon"><img src="assets/Youtube.png" alt="YouTube"></div>
+          <div class="hstep-icon"><img src="assets/Linkedin.png" alt="LinkedIn"></div>
+          <div class="hstep-icon"><img src="assets/Shorts.png" alt="Shorts"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
 
 <!-- HIGHLIGHTED EDITS -->
 <section class="hle-sec">
@@ -626,7 +716,7 @@
         <div class="pcard-results">
           <div class="presults-label">Results</div>
           <div class="presults-grid">
-            <div><div class="presult-num">1M+</div><div class="presult-lbl">Views</div></div>
+            <div><div class="presult-num">2.3M+</div><div class="presult-lbl">Views</div></div>
             <div><div class="presult-num">88%+</div><div class="presult-lbl">Retention</div></div>
             <div><div class="presult-num">24K+</div><div class="presult-lbl">Likes</div></div>
           </div>
@@ -729,7 +819,7 @@
         <div class="pcard-results">
           <div class="presults-label">Results</div>
           <div class="presults-grid">
-            <div><div class="presult-num">45K+</div><div class="presult-lbl">Views</div></div>
+            <div><div class="presult-num">450K+</div><div class="presult-lbl">Views</div></div>
             <div><div class="presult-num">72%+</div><div class="presult-lbl">Retention</div></div>
             <div><div class="presult-num">2.1K+</div><div class="presult-lbl">Likes</div></div>
           </div>
@@ -829,7 +919,7 @@
         <div class="pcard-results">
           <div class="presults-label">Results</div>
           <div class="presults-grid">
-            <div><div class="presult-num">80K+</div><div class="presult-lbl">Views</div></div>
+            <div><div class="presult-num">386K+</div><div class="presult-lbl">Views</div></div>
             <div><div class="presult-num">82%+</div><div class="presult-lbl">Retention</div></div>
             <div><div class="presult-num">3.5K+</div><div class="presult-lbl">Likes</div></div>
           </div>
