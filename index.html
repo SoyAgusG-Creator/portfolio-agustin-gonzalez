@@ -1191,6 +1191,15 @@
       setTimeout(() => { el.style.opacity = '1'; el.style.transform = 'translateY(0)'; }, 80);
     });
   })();
+
+  /* HASH DEEP LINK — agregar entradas acá para nuevos videos */
+  (function() {
+    const links = {
+      'ivan-villegas': 'g24fLUx34ck',
+    };
+    const slug = location.hash.slice(1);
+    if (links[slug]) setTimeout(() => openV(links[slug]), 350);
+  })();
 </script>
 </body>
 </html>
