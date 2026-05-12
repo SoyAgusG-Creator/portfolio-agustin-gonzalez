@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agus González | Video Editor</title>
+  <meta name="description" content="Video editing for content creators, info-producers, and agencies. 10M+ views generated.">
+  <link rel="icon" href="assets/a.ico" type="image/x-icon">
+  <link rel="icon" href="assets/a.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:    #090909;
+      --bg2:   #0f0f13;
+      --bg3:   #151519;
+      --bg4:   #1c1c22;
+      --bg5:   #23232b;
+      --border: rgba(255,255,255,0.07);
+      --bhi:   rgba(255,255,255,0.14);
+      --text:  #f0f0f5;
+      --text2: #8a8aa4;
+      --text3: #48485e;
+      --o1:    #ff6b35;
+      --o2:    #ff9500;
+      --odim:  rgba(255,107,53,0.12);
+      --grad:  linear-gradient(135deg, #ff6b35 0%, #ff9500 100%);
+      --sans:  'Inter', -apple-system, system-ui, sans-serif;
+      --mono:  'SF Mono', 'Fira Code', monospace;
+      --r:     12px;
+      --rl:    20px;
+      --nav-h: 60px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; overflow-x: hidden; }
+    body { background: var(--bg); color: var(--text); font-family: var(--sans); font-size: 15px; line-height: 1.65; overflow-x: hidden; max-width: 100vw; -webkit-font-smoothing: antialiased; }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg2); }
+    ::-webkit-scrollbar-thumb { background: var(--bg5); border-radius: 3px; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; height: var(--nav-h); background: rgba(9,9,9,0.82); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 6%; z-index: 200; gap: 24px; transition: border-color 0.3s; }
+    nav.scrolled { border-bottom-color: rgba(255,255,255,0.11); }
+    .nav-logo { font-size: 15px; font-weight: 700; letter-spacing: -0.02em; color: var(--text); text-decoration: none; }
+    .nav-logo em { font-style: normal; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .nav-links { display: flex; align-items: center; gap: 30px; list-style: none; }
+    .nav-links a { font-size: 13px; font-weight: 500; color: var(--text2); text-decoration: none; transition: color 0.18s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: #fff; background: var(--o1); padding: 8px 18px; border-radius: 8px; text-decoration: none; transition: all 0.2s; white-space: nowrap; }
+    .nav-cta:hover { background: var(--o2); transform: translateY(-1px); box-shadow: 0 4px 20px rgba(255,107,53,0.3); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all 0.25s; }
+    .mob-nav { display: none; position: fixed; top: var(--nav-h); left: 0; right: 0; background: var(--bg2); border-bottom: 1px solid var(--border); padding: 16px 6%; z-index: 199; flex-direction: column; gap: 2px; }
+    .mob-nav.open { display: flex; }
+    .mob-nav a { font-size: 15px; font-weight: 500; color: var(--text2); text-decoration: none; padding: 13px 0; border-bottom: 1px solid var(--border); transition: color 0.18s; }
+    .mob-nav a:last-child { border-bottom: none; color: var(--o1); }
+
+    /* BUTTONS */
+    .btn { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; padding: 14px 26px; border-radius: var(--r); text-decoration: none; transition: all 0.22s; border: none; cursor: pointer; font-family: var(--sans); }
+    .btn-or { color: #fff; background: var(--o1); }
+    .btn-or:hover { background: var(--o2); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(255,107,53,0.35); }
+    .btn-gh { color: var(--text2); background: transparent; border: 1px solid var(--border); font-weight: 500; }
+    .btn-gh:hover { color: var(--text); border-color: var(--bhi); background: var(--bg3); }
+    .btn-wa { color: #fff; background: #25D366; }
+    .btn-wa:hover { background: #1fba59; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(37,211,102,0.3); }
+    .btn-mail { color: var(--text2); background: transparent; border: 1px solid var(--border); font-weight: 500; }
+    .btn-mail:hover { color: var(--text); border-color: var(--bhi); background: var(--bg3); }
+
+    /* HERO */
+    .hero { min-height: 100vh; padding: calc(var(--nav-h) + 90px) 6% 90px; display: flex; align-items: center; position: relative; overflow: hidden; }
+    .hero-glow-r { position: absolute; top: 0; right: -10%; width: 800px; height: 800px; background: radial-gradient(circle, rgba(255,107,53,0.11) 0%, rgba(255,149,0,0.04) 40%, transparent 70%); pointer-events: none; }
+    .hero-glow-l { position: absolute; bottom: 0; left: -8%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(255,107,53,0.07) 0%, transparent 65%); pointer-events: none; }
+    .hero-glow-mid { position: absolute; top: 30%; left: 30%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(255,149,0,0.04) 0%, transparent 65%); pointer-events: none; }
+    .hero-inner { width: 100%; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.15fr 0.85fr; grid-template-rows: auto auto; column-gap: 64px; position: relative; z-index: 1; }
+    .hero-text-top { grid-column: 1; grid-row: 1; }
+    .hero-text-bot { grid-column: 1; grid-row: 2; padding-top: 30px; }
+    .hero-img-side { grid-column: 2; grid-row: 1 / span 2; display: flex; justify-content: center; align-items: center; }
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--o1); background: var(--odim); border: 1px solid rgba(255,107,53,0.22); padding: 6px 14px; border-radius: 20px; margin-bottom: 26px; }
+    .hero-eyebrow::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--o1); animation: pulse-dot 2.2s ease-in-out infinite; }
+    @keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.35;transform:scale(.75)} }
+    .hero h1 { font-size: clamp(38px, 5.2vw, 68px); font-weight: 900; letter-spacing: -0.035em; line-height: 1.0; color: #fff; margin-bottom: 22px; }
+    .gtext { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-sub { font-size: 16px; color: var(--text2); line-height: 1.8; max-width: 500px; margin-bottom: 30px; }
+    .hero-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 40px; }
+    .chip { font-size: 12px; font-weight: 500; color: var(--text2); background: var(--bg3); border: 1px solid var(--border); padding: 5px 13px; border-radius: 20px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .hero-img-side { display: flex; justify-content: center; align-items: center; }
+    .hero-img-wrap { position: relative; width: 100%; max-width: 400px; }
+    .hero-img-aura { position: absolute; inset: -30px; background: radial-gradient(ellipse at center 80%, rgba(255,107,53,0.18) 0%, rgba(255,149,0,0.06) 40%, transparent 70%); pointer-events: none; }
+    .hero-img-frame { position: relative; border-radius: var(--rl); overflow: hidden; border: 1px solid var(--border); box-shadow: 0 24px 80px rgba(0,0,0,0.5); }
+    .hero-img-frame img { width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block; filter: brightness(0.97) contrast(1.04); min-height: 300px; background: var(--bg3); }
+    .hero-img-frame::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 120px; background: linear-gradient(to top, rgba(9,9,9,0.45), transparent); }
+    .fpill { position: absolute; display: flex; align-items: center; gap: 10px; background: rgba(12,12,16,0.9); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--r); padding: 10px 16px; animation: flt 7s ease-in-out infinite; box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
+    .fpill:nth-child(3) { animation-delay: -3.5s; }
+    @keyframes flt { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-9px)} }
+    .fpill-top { top: 14%; right: -10%; }
+    .fpill-bot { bottom: 14%; left: -10%; }
+    .fpill-num { font-size: 17px; font-weight: 800; letter-spacing: -0.03em; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .fpill-lbl { font-size: 11px; color: var(--text2); }
+
+    /* SECTION SHARED */
+    .sec { padding: 96px 0; position: relative; overflow: hidden; }
+    .sec-alt { background: var(--bg2); }
+    .inner { max-width: 1200px; margin: 0 auto; padding: 0 6%; }
+    .sec-head { text-align: center; margin-bottom: 56px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--o1); margin-bottom: 14px; }
+    .eyebrow::before, .eyebrow::after { content: ''; width: 22px; height: 1px; background: var(--o1); opacity: 0.45; }
+    .sec-title { font-size: clamp(26px, 3.5vw, 44px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; color: #fff; margin-bottom: 14px; }
+    .sec-sub { font-size: 15px; color: var(--text2); max-width: 520px; margin: 0 auto; line-height: 1.75; }
+
+    /* MARQUEE — fixed: no padding, logo fills container */
+    .marquee-sec { padding: 44px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .marquee-lbl { text-align: center; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text3); margin-bottom: 28px; }
+    .marquee-outer { overflow: hidden; position: relative; }
+    .marquee-outer::before, .marquee-outer::after { content: ''; position: absolute; top: 0; bottom: 0; width: 120px; z-index: 2; pointer-events: none; }
+    .marquee-outer::before { left: 0; background: linear-gradient(to right, var(--bg), transparent); }
+    .marquee-outer::after  { right: 0; background: linear-gradient(to left,  var(--bg), transparent); }
+    .marquee-track { display: flex; gap: 12px; animation: mq 30s linear infinite; width: max-content; align-items: center; }
+    @keyframes mq { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+    .mitem { width: 80px; height: 80px; overflow: hidden; background: var(--bg2); border: 1px solid var(--border); border-radius: 16px; flex-shrink: 0; transition: border-color 0.2s; }
+    .mitem:hover { border-color: var(--bhi); }
+    .logo-img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit; }
+
+    /* HIGHLIGHTED EDITS */
+    .hle-sec { padding: 80px 0 0; overflow: hidden; }
+    .hle-header { padding: 0 6% 24px; display: flex; justify-content: space-between; align-items: center; }
+    .hle-left { display: flex; align-items: center; gap: 12px; }
+    .hle-line { width: 28px; height: 1px; background: var(--text3); }
+    .hle-label { font-size: 13px; font-weight: 700; color: var(--o1); letter-spacing: 0.04em; }
+    .hle-nav { display: flex; align-items: center; gap: 16px; }
+    .hle-count { font-family: var(--mono); font-size: 12px; color: var(--text3); min-width: 40px; text-align: center; }
+    .hle-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--bg3); border: 1px solid var(--border); color: var(--text2); font-size: 15px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.18s; font-family: var(--sans); }
+    .hle-btn:hover { border-color: var(--bhi); color: var(--text); background: var(--bg4); }
+    .hle-track-wrap { overflow: hidden; width: 100%; }
+    .hle-track { display: flex; gap: 6px; padding: 0 6% 80px; transition: transform 0.55s cubic-bezier(0.25,0.1,0.25,1); }
+    .hle-item { flex: 0 0 200px; position: relative; border-radius: 18px; overflow: hidden; cursor: pointer; aspect-ratio: 9/16; transition: transform 0.3s; }
+    .hle-item:hover { transform: scale(1.02); }
+    .hle-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.45s; }
+    .hle-item:hover img { transform: scale(1.06); }
+    .hle-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 45%); }
+    .hle-play-ring { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.22s; }
+    .hle-item:hover .hle-play-ring { opacity: 1; }
+    .hle-play-inner { width: 52px; height: 52px; border-radius: 50%; background: rgba(255,107,53,0.88); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; box-shadow: 0 0 30px rgba(255,107,53,0.5); }
+    .hle-play-inner svg { width: 18px; height: 18px; fill: #fff; margin-left: 3px; }
+
+    /* SERVICES — with subtle depth shadow */
+    .srv-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; }
+    .scard { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--rl); padding: 28px 22px; position: relative; overflow: hidden; transition: all 0.25s; box-shadow: 0 4px 28px rgba(0,0,0,0.28); }
+    .scard::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--grad); transform: scaleX(0); transition: transform 0.3s ease; }
+    .scard:hover::before { transform: scaleX(1); }
+    .scard:hover { border-color: rgba(255,107,53,0.22); background: var(--bg4); transform: translateY(-3px); box-shadow: 0 12px 44px rgba(255,107,53,0.1), 0 4px 28px rgba(0,0,0,0.4); }
+    .sicon { font-size: 28px; margin-bottom: 16px; display: block; }
+    .stitle { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 8px; letter-spacing: -0.01em; }
+    .sdesc { font-size: 13px; color: var(--text2); line-height: 1.65; margin-bottom: 16px; }
+    .stags { display: flex; flex-wrap: wrap; gap: 5px; }
+    .stag { font-size: 10px; font-weight: 500; color: var(--text3); background: var(--bg5); padding: 3px 8px; border-radius: 4px; }
+
+    /* BENEFITS */
+    .ben-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; }
+    .bcard { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--rl); padding: 34px 22px; text-align: center; transition: all 0.25s; }
+    .bcard:hover { border-color: var(--bhi); background: var(--bg3); transform: translateY(-2px); }
+    .bnum { font-size: 44px; font-weight: 900; letter-spacing: -0.045em; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; margin-bottom: 10px; }
+    .btitle { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+    .bdesc { font-size: 12px; color: var(--text3); line-height: 1.6; }
+
+    /* PROJECT CARDS */
+    .proj-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; }
+    .pcard { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--rl); padding: 28px; transition: border-color 0.2s; }
+    .pcard:hover { border-color: var(--bhi); }
+    .pcard-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; padding-bottom: 18px; border-bottom: 1px solid var(--border); }
+    .pcard-num { font-family: var(--mono); font-size: 11px; color: var(--text3); }
+    .pcard-type { display: flex; align-items: center; gap: 10px; font-size: 11px; font-weight: 600; color: var(--text3); letter-spacing: 0.08em; text-transform: uppercase; }
+    .pcard-type::after { content: ''; width: 36px; height: 1px; background: var(--border); }
+    .pcard-client { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+    .pcard-avatar { width: 38px; height: 38px; border-radius: 50%; background: var(--bg4); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: var(--o1); flex-shrink: 0; }
+    .pcard-name { font-size: 20px; font-weight: 800; color: var(--text); letter-spacing: -0.025em; }
+    .pcard-desc { font-size: 13px; color: var(--text2); margin-bottom: 20px; line-height: 1.65; }
+    .pcard-results { margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--border); }
+    .presults-label { font-size: 11px; color: var(--text3); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; letter-spacing: 0.06em; text-transform: uppercase; }
+    .presults-label::before { content: ''; width: 20px; height: 1px; background: var(--border); }
+    .presults-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 4px; }
+    .presult-num { font-size: 20px; font-weight: 800; letter-spacing: -0.03em; color: var(--text); }
+    .presult-lbl { font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+    /* SHARED PLAY OVERLAY (used in both carousel types) */
+    .pthumb-play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.25); opacity: 0; transition: opacity 0.2s; border-radius: inherit; }
+    .ppbtn { width: 44px; height: 44px; border-radius: 50%; background: rgba(255,107,53,0.9); display: flex; align-items: center; justify-content: center; }
+    .ppbtn svg { width: 16px; height: 16px; fill: #fff; margin-left: 2px; }
+
+    /* SHARED CAROUSEL BUTTONS */
+    .car-btn { width: 30px; height: 30px; border-radius: 50%; background: var(--bg4); border: 1px solid var(--border); color: var(--text2); font-size: 13px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.18s; padding: 0; flex-shrink: 0; }
+    .car-btn:hover { border-color: var(--bhi); color: var(--text); background: var(--bg5); }
+
+    /* VERTICAL CAROUSEL — short content, 3 visible */
+    .pvc-wrap { overflow: hidden; }
+    .pvc-track { display: flex; gap: 8px; transition: transform 0.4s cubic-bezier(0.25,0.1,0.25,1); }
+    .pvc-thumb { flex: 0 0 calc((100% - 16px) / 3); aspect-ratio: 9/16; border-radius: 10px; overflow: hidden; cursor: pointer; position: relative; flex-shrink: 0; }
+    .pvc-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s; }
+    .pvc-thumb:hover img { transform: scale(1.05); }
+    .pvc-thumb:hover .pthumb-play { opacity: 1; }
+    .pvc-controls { display: flex; justify-content: flex-end; align-items: center; gap: 8px; margin-top: 10px; }
+
+    /* HORIZONTAL CAROUSEL — long form / VSL / trailers, 1 at a time */
+    .phc-wrap { overflow: hidden; border-radius: 12px; }
+    .phc-track { display: flex; transition: transform 0.4s cubic-bezier(0.25,0.1,0.25,1); }
+    .phc-thumb { flex: 0 0 100%; aspect-ratio: 16/9; overflow: hidden; cursor: pointer; position: relative; border-radius: 12px; }
+    .phc-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s; }
+    .phc-thumb:hover img { transform: scale(1.03); }
+    .phc-thumb:hover .pthumb-play { opacity: 1; }
+    .phc-controls { display: flex; align-items: center; gap: 8px; margin-top: 10px; justify-content: flex-end; }
+    .phc-count { font-family: var(--mono); font-size: 12px; color: var(--text3); margin-right: auto; }
+
+    /* FAQ */
+    .faq-wrap { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 10px; }
+    .fi { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; transition: border-color 0.2s; }
+    .fi.open { border-color: rgba(255,107,53,0.22); }
+    .fq { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 18px 22px; background: none; border: none; color: var(--text); font-size: 15px; font-weight: 600; font-family: var(--sans); text-align: left; cursor: pointer; gap: 16px; transition: color 0.2s; }
+    .fq:hover { color: #fff; }
+    .fico { width: 22px; height: 22px; border-radius: 50%; background: var(--bg4); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; transition: all 0.25s; color: var(--text3); line-height: 1; }
+    .fi.open .fico { background: var(--odim); border-color: rgba(255,107,53,0.3); color: var(--o1); transform: rotate(45deg); }
+    .fa { max-height: 0; overflow: hidden; transition: max-height 0.38s cubic-bezier(0,1,0,1); }
+    .fi.open .fa { max-height: 320px; transition: max-height 0.52s cubic-bezier(1,0,1,0); }
+    .fa-in { padding: 0 22px 20px; font-size: 14px; color: var(--text2); line-height: 1.75; }
+
+    /* CTA — SPLIT */
+    .cta-sec { padding: 96px 0; position: relative; overflow: hidden; }
+    .cta-sec::before { content: ''; position: absolute; top: -60px; left: 50%; transform: translateX(-50%); width: 900px; height: 600px; background: radial-gradient(ellipse at center, rgba(255,107,53,0.07) 0%, transparent 65%); pointer-events: none; }
+    .cta-card { position: relative; background: var(--bg2); border: 1px solid var(--border); border-radius: 28px; overflow: hidden; display: grid; grid-template-columns: 1fr 1fr; max-width: 1200px; margin: 0 auto; min-height: 500px; }
+    .cta-card::before { content: ''; position: absolute; top: -1px; left: 8%; right: 8%; height: 2px; background: var(--grad); border-radius: 0 0 2px 2px; }
+    .cta-left { padding: 64px 56px; display: flex; flex-direction: column; justify-content: center; position: relative; z-index: 1; }
+    .cta-lbl { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--o1); margin-bottom: 22px; }
+    .cta-h { font-size: clamp(30px, 3.5vw, 52px); font-weight: 900; letter-spacing: -0.035em; color: #fff; line-height: 1.05; margin-bottom: 18px; }
+    .cta-p { font-size: 15px; color: var(--text2); margin-bottom: 36px; line-height: 1.75; max-width: 380px; }
+    .cta-btns { display: flex; flex-wrap: wrap; gap: 12px; }
+    .cta-right { position: relative; overflow: hidden; }
+    /* 6-cell mosaic — 2 cols × 3 rows, all filled */
+    .cta-mosaic { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr 1fr; gap: 6px; padding: 20px 20px 20px 8px; height: 100%; }
+    .cmv { border-radius: 12px; overflow: hidden; cursor: pointer; position: relative; background: var(--bg3); }
+    .cmv img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s; }
+    .cmv:hover img { transform: scale(1.05); }
+    .cmv-play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.2); opacity: 0; transition: opacity 0.2s; }
+    .cmv:hover .cmv-play { opacity: 1; }
+    .cmv-pb { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,107,53,0.85); display: flex; align-items: center; justify-content: center; }
+    .cmv-pb svg { width: 14px; height: 14px; fill: #fff; margin-left: 2px; }
+
+    /* FOOTER */
+    .site-footer { border-top: 1px solid var(--border); padding: 64px 6% 0; }
+    .footer-top { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 48px; padding-bottom: 56px; }
+    .footer-logo { font-size: 36px; font-weight: 900; letter-spacing: -0.04em; color: #fff; margin-bottom: 20px; line-height: 1; }
+    .footer-logo em { font-style: normal; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .footer-cta { display: inline-flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; color: var(--text); background: var(--bg3); border: 1px solid var(--border); padding: 12px 22px; border-radius: 50px; text-decoration: none; transition: all 0.22s; }
+    .footer-cta:hover { border-color: var(--o1); color: var(--o1); box-shadow: 0 0 20px rgba(255,107,53,0.15); }
+    .footer-cta-arrow { width: 28px; height: 28px; border-radius: 50%; background: var(--o1); display: flex; align-items: center; justify-content: center; font-size: 14px; transition: transform 0.2s; }
+    .footer-cta:hover .footer-cta-arrow { transform: rotate(45deg); }
+    .footer-col-title { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text3); margin-bottom: 20px; }
+    .footer-col a { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--text2); text-decoration: none; margin-bottom: 12px; transition: color 0.18s; }
+    .footer-col a:hover { color: var(--text); }
+    .footer-socials { display: flex; gap: 12px; margin-top: 20px; }
+    .fsoc { width: 38px; height: 38px; border-radius: 50%; background: var(--bg3); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; text-decoration: none; color: var(--text2); transition: all 0.2s; }
+    .fsoc svg { width: 16px; height: 16px; fill: currentColor; display: block; }
+    .fsoc:hover { border-color: var(--bhi); color: var(--text); background: var(--bg4); }
+    .footer-bottom { border-top: 1px solid var(--border); padding: 20px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+    .footer-copy { font-size: 12px; color: var(--text3); }
+
+    /* MODAL */
+    .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 500; display: flex; align-items: center; justify-content: center; padding: 24px; opacity: 0; pointer-events: none; transition: opacity 0.25s; }
+    .modal.open { opacity: 1; pointer-events: all; }
+    .modal-inner { width: 100%; max-width: 920px; position: relative; }
+    .modal-close { position: absolute; top: -46px; right: 0; font-size: 13px; font-weight: 500; color: var(--text2); cursor: pointer; display: flex; align-items: center; gap: 6px; transition: color 0.2s; padding: 4px; }
+    .modal-close:hover { color: var(--text); }
+    .modal-frame { aspect-ratio: 16/9; width: 100%; border-radius: var(--r); overflow: hidden; background: #000; }
+    .modal-frame iframe { width: 100%; height: 100%; border: none; }
+
+    /* SCROLL REVEAL */
+    .rev { opacity: 0; transform: translateY(26px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .rev.vis { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: 0.08s; } .d2 { transition-delay: 0.17s; }
+    .d3 { transition-delay: 0.26s; } .d4 { transition-delay: 0.35s; }
+
+    /* HOW I WORK */
+    .hw-grid { display: grid; grid-template-columns: repeat(5,1fr); position: relative; }
+    .hw-grid::before { content: ''; position: absolute; top: 19px; left: 10%; right: 10%; height: 1px; background: linear-gradient(to right, transparent, var(--border) 10%, var(--border) 90%, transparent); pointer-events: none; }
+    .hstep { padding: 0 14px; display: flex; flex-direction: column; }
+    .hstep-num { width: 40px; height: 40px; border-radius: 50%; background: var(--bg3); border: 1px solid rgba(255,107,53,0.28); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 12px; font-weight: 600; color: var(--o1); margin-bottom: 20px; position: relative; z-index: 1; flex-shrink: 0; }
+    .hstep-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 8px; letter-spacing: -0.01em; }
+    .hstep-desc { font-size: 12px; color: var(--text2); line-height: 1.65; margin-bottom: 16px; flex: 1; }
+    .hstep-icons { display: flex; gap: 7px; flex-wrap: wrap; align-items: center; }
+    .hstep-icon { width: 30px; height: 30px; border-radius: 8px; overflow: hidden; background: var(--bg3); border: 1px solid var(--border); flex-shrink: 0; }
+    .hstep-icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* RESPONSIVE */
+    @media (max-width: 1100px) {
+      .hw-grid { grid-template-columns: repeat(3,1fr); gap: 24px; }
+      .hw-grid::before { display: none; }
+      .srv-grid { grid-template-columns: repeat(2,1fr); }
+      .ben-grid { grid-template-columns: repeat(2,1fr); }
+      .proj-grid { grid-template-columns: 1fr; }
+      .cta-card { grid-template-columns: 1fr; }
+      .cta-right { display: none; }
+      .cta-left { padding: 56px 40px; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .footer-brand { grid-column: span 2; }
+    }
+    @media (max-width: 768px) {
+      .hw-grid { grid-template-columns: 1fr; gap: 0; }
+      .hw-grid::before { display: none; }
+      .hstep { padding: 0 0 0 48px; margin-bottom: 32px; position: relative; border-left: 1px solid var(--border); margin-left: 20px; padding-bottom: 32px; }
+      .hstep:last-child { border-left: none; margin-bottom: 0; }
+      .hstep-num { position: absolute; left: -20px; top: 0; margin-bottom: 0; }
+      .hstep-title { margin-top: 8px; }
+      .hero-inner { grid-template-columns: 1fr; grid-template-rows: auto auto auto; column-gap: 0; row-gap: 28px; }
+      .hero-text-top { grid-column: 1; grid-row: 1; }
+      .hero-img-side { grid-column: 1; grid-row: 2; }
+      .hero-text-bot { grid-column: 1; grid-row: 3; padding-top: 0; }
+      .hero-img-wrap { max-width: 300px; margin: 0 auto; }
+      .fpill-top { top: auto; bottom: -16px; right: 0; }
+      .fpill-bot { display: none; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .srv-grid { grid-template-columns: 1fr; }
+      .hle-item { flex: 0 0 160px; }
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-brand { grid-column: span 1; }
+    }
+    @media (max-width: 560px) {
+      .ben-grid { grid-template-columns: 1fr; }
+      .cta-left { padding: 44px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">Agus <em>González</em></a>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <a href="https://wa.link/g67oew" class="nav-cta" target="_blank" rel="noopener">Let's talk →</a>
+  <div class="hamburger" id="hbg" onclick="toggleNav()"><span></span><span></span><span></span></div>
+</nav>
+<div class="mob-nav" id="mobnav">
+  <a href="#work"     onclick="closeNav()">Work</a>
+  <a href="#services" onclick="closeNav()">Services</a>
+  <a href="#projects" onclick="closeNav()">Projects</a>
+  <a href="#faq"      onclick="closeNav()">FAQ</a>
+  <a href="https://wa.link/g67oew" target="_blank" rel="noopener" onclick="closeNav()">→ Message me on WhatsApp</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow-r"></div>
+  <div class="hero-glow-l"></div>
+  <div class="hero-glow-mid"></div>
+  <div class="hero-inner">
+    <div class="hero-text-top">
+      <div class="hero-eyebrow">Video Editor · WorldWide</div>
+      <h1>Video editing<br>that <span class="gtext">converts</span><br>your views.</h1>
+      <p class="hero-sub">Stand out in the fast-paced world of digital content. Dynamic, engaging videos that captivate viewers, grow your audience, and drive more sales.</p>
+    </div>
+    <div class="hero-img-side">
+      <div class="hero-img-wrap">
+        <div class="hero-img-aura"></div>
+        <div class="hero-img-frame">
+          <img src="assets/agus.jpg" alt="Agus González — Video Editor" onerror="this.parentElement.style.minHeight='480px'">
+        </div>
+        <div class="fpill fpill-top">
+          <div><div class="fpill-num">10M+</div><div class="fpill-lbl">Views generated</div></div>
+        </div>
+        <div class="fpill fpill-bot">
+          <div><div class="fpill-num">50+</div><div class="fpill-lbl">Creators</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-text-bot">
+      <div class="hero-chips">
+        <span class="chip">Content Creators</span>
+        <span class="chip">Info-Producers</span>
+        <span class="chip">Agencies</span>
+      </div>
+      <div class="hero-actions">
+        <a href="https://wa.link/g67oew" class="btn btn-or" target="_blank" rel="noopener">💬 Message me on WhatsApp</a>
+        <a href="#projects" class="btn btn-gh">See my work ↓</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS MARQUEE -->
+<div class="marquee-sec" id="work">
+  <div class="marquee-lbl">Elite tools · Elite results</div>
+  <div class="marquee-outer">
+    <div class="marquee-track">
+      <div class="mitem"><img src="assets/Premiere.png"          class="logo-img" alt="Premiere Pro"></div>
+      <div class="mitem"><img src="assets/AfterEffects.png"      class="logo-img" alt="After Effects"></div>
+      <div class="mitem"><img src="assets/PhotoshopLogo.png"     class="logo-img" alt="Photoshop"></div>
+      <div class="mitem"><img src="assets/Ilustrator.png"        class="logo-img" alt="Illustrator"></div>
+      <div class="mitem"><img src="assets/Figma2.png"            class="logo-img" alt="Figma"></div>
+      <div class="mitem"><img src="assets/CreativeCloudLogo.png" class="logo-img" alt="Adobe CC"></div>
+      <div class="mitem"><img src="assets/ArtList.jpg"           class="logo-img" alt="Artlist"></div>
+      <div class="mitem"><img src="assets/MagnificLogo.png"      class="logo-img" alt="Magnific"></div>
+      <div class="mitem"><img src="assets/NanoBanana2.webp"        class="logo-img" alt="NanoBanana"></div>
+      <div class="mitem"><img src="assets/NotionLogo.png"        class="logo-img" alt="Notion"></div>
+      <div class="mitem"><img src="assets/FrameIO.png"           class="logo-img" alt="Frame.io"></div>
+      <div class="mitem"><img src="assets/HiggsfieldLogo.png"    class="logo-img" alt="Higgsfield"></div>
+      <!-- duplicate for seamless loop -->
+      <div class="mitem"><img src="assets/Premiere.png"          class="logo-img" alt="Premiere Pro"></div>
+      <div class="mitem"><img src="assets/AfterEffects.png"      class="logo-img" alt="After Effects"></div>
+      <div class="mitem"><img src="assets/PhotoshopLogo.png"     class="logo-img" alt="Photoshop"></div>
+      <div class="mitem"><img src="assets/Ilustrator.png"        class="logo-img" alt="Illustrator"></div>
+      <div class="mitem"><img src="assets/Figma2.png"            class="logo-img" alt="Figma"></div>
+      <div class="mitem"><img src="assets/CreativeCloudLogo.png" class="logo-img" alt="Adobe CC"></div>
+      <div class="mitem"><img src="assets/ArtList.jpg"           class="logo-img" alt="Artlist"></div>
+      <div class="mitem"><img src="assets/MagnificLogo.png"      class="logo-img" alt="Magnific"></div>
+      <div class="mitem"><img src="assets/NanoBanana2.webp"        class="logo-img" alt="NanoBanana"></div>
+      <div class="mitem"><img src="assets/NotionLogo.png"        class="logo-img" alt="Notion"></div>
+      <div class="mitem"><img src="assets/FrameIO.png"           class="logo-img" alt="Frame.io"></div>
+      <div class="mitem"><img src="assets/HiggsfieldLogo.png"    class="logo-img" alt="Higgsfield"></div>
+    </div>
+  </div>
+</div>
+
+<!-- HOW I WORK -->
+<section class="sec sec-alt" id="process">
+  <div class="inner">
+    <div class="sec-head rev">
+      <div class="eyebrow">Process</div>
+      <h2 class="sec-title">How I work</h2>
+      <p class="sec-sub">A clear, structured workflow from the first call to final delivery.</p>
+    </div>
+    <div class="hw-grid">
+
+      <div class="hstep rev d1">
+        <div class="hstep-num">01</div>
+        <div class="hstep-title">Onboarding</div>
+        <div class="hstep-desc">Initial call with a brief to define your visual brand guide, content plan, references, goals, and deadlines.</div>
+        <div class="hstep-icons">
+          <div class="hstep-icon"><img src="assets/GoogleMeet.png" alt="Google Meet"></div>
+          <div class="hstep-icon"><img src="assets/Fathom.png" alt="Fathom"></div>
+        </div>
+      </div>
+
+      <div class="hstep rev d2">
+        <div class="hstep-num">02</div>
+        <div class="hstep-title">Assets upload</div>
+        <div class="hstep-desc">You upload the raw footage and files to a shared Google Drive folder — organized and ready to work with.</div>
+        <div class="hstep-icons">
+          <div class="hstep-icon"><img src="assets/GoogleDrive.png" alt="Google Drive"></div>
+        </div>
+      </div>
+
+      <div class="hstep rev d3">
+        <div class="hstep-num">03</div>
+        <div class="hstep-title">Professional editing</div>
+        <div class="hstep-desc">I receive the material and edit it professionally, applying everything we discussed — style, rhythm, branding, and hooks.</div>
+        <div class="hstep-icons">
+          <div class="hstep-icon"><img src="assets/Premiere.png" alt="Premiere Pro"></div>
+          <div class="hstep-icon"><img src="assets/AfterEffects.png" alt="After Effects"></div>
+        </div>
+      </div>
+
+      <div class="hstep rev d4">
+        <div class="hstep-num">04</div>
+        <div class="hstep-title">Review &amp; feedback</div>
+        <div class="hstep-desc">You review the edit and leave comments directly on the timeline. We refine together until it's exactly right.</div>
+        <div class="hstep-icons">
+          <div class="hstep-icon"><img src="assets/FrameIO.png" alt="Frame.io"></div>
+        </div>
+      </div>
+
+      <div class="hstep rev d4">
+        <div class="hstep-num">05</div>
+        <div class="hstep-title">Delivery &amp; publish</div>
+        <div class="hstep-desc">Clean files delivered in every required format, optimized and ready to go live across all your platforms.</div>
+        <div class="hstep-icons">
+          <div class="hstep-icon"><img src="assets/IG.png" alt="Instagram"></div>
+          <div class="hstep-icon"><img src="assets/TikTok.webp" alt="TikTok"></div>
+          <div class="hstep-icon"><img src="assets/Youtube.png" alt="YouTube"></div>
+          <div class="hstep-icon"><img src="assets/Linkedin.png" alt="LinkedIn"></div>
+          <div class="hstep-icon"><img src="assets/Shorts.png" alt="Shorts"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- HIGHLIGHTED EDITS -->
+<section class="hle-sec">
+  <div class="hle-header">
+    <div class="hle-left">
+      <span class="hle-line"></span>
+      <span class="hle-label">Highlighted edits</span>
+    </div>
+    <div class="hle-nav">
+      <button class="hle-btn" onclick="hleMove(-1)">←</button>
+      <span class="hle-count" id="hleCount">(01)</span>
+      <button class="hle-btn" onclick="hleMove(1)">→</button>
+    </div>
+  </div>
+  <div class="hle-track-wrap">
+    <div class="hle-track" id="hleTrack">
+      <div class="hle-item" onclick="openV('eXdrYVigJCg')">
+        <img src="https://img.youtube.com/vi/eXdrYVigJCg/maxresdefault.jpg" alt="" loading="lazy">
+        <div class="hle-overlay"></div>
+        <div class="hle-play-ring"><div class="hle-play-inner"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      </div>
+      <div class="hle-item" onclick="openV('7PuVmMqxnao')">
+        <img src="https://img.youtube.com/vi/7PuVmMqxnao/maxresdefault.jpg" alt="" loading="lazy">
+        <div class="hle-overlay"></div>
+        <div class="hle-play-ring"><div class="hle-play-inner"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      </div>
+      <div class="hle-item" onclick="openV('drWLeQAIdIs')">
+        <img src="https://img.youtube.com/vi/drWLeQAIdIs/maxresdefault.jpg" alt="" loading="lazy">
+        <div class="hle-overlay"></div>
+        <div class="hle-play-ring"><div class="hle-play-inner"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      </div>
+      <div class="hle-item" onclick="openV('yMHs3yyY11I')">
+        <img src="https://img.youtube.com/vi/yMHs3yyY11I/hqdefault.jpg" alt="" loading="lazy">
+        <div class="hle-overlay"></div>
+        <div class="hle-play-ring"><div class="hle-play-inner"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      </div>
+      <div class="hle-item" onclick="openV('CLVe6Qsd8qE')">
+        <img src="https://img.youtube.com/vi/CLVe6Qsd8qE/maxresdefault.jpg" alt="" loading="lazy">
+        <div class="hle-overlay"></div>
+        <div class="hle-play-ring"><div class="hle-play-inner"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      </div>
+      <div class="hle-item" onclick="openV('ElC5sdmlTlI')">
+        <img src="https://img.youtube.com/vi/ElC5sdmlTlI/maxresdefault.jpg" alt="" loading="lazy">
+        <div class="hle-overlay"></div>
+        <div class="hle-play-ring"><div class="hle-play-inner"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      </div>
+      <div class="hle-item" onclick="openV('T0ip3l274d4')">
+        <img src="https://img.youtube.com/vi/T0ip3l274d4/maxresdefault.jpg" alt="" loading="lazy">
+        <div class="hle-overlay"></div>
+        <div class="hle-play-ring"><div class="hle-play-inner"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      </div>
+      <div class="hle-item" onclick="openV('Hp7kqZGsgKE')">
+        <img src="https://img.youtube.com/vi/Hp7kqZGsgKE/maxresdefault.jpg" alt="" loading="lazy">
+        <div class="hle-overlay"></div>
+        <div class="hle-play-ring"><div class="hle-play-inner"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      </div>
+      <div class="hle-item" onclick="openV('utOZNopvXN0')">
+        <img src="https://img.youtube.com/vi/utOZNopvXN0/maxresdefault.jpg" alt="" loading="lazy">
+        <div class="hle-overlay"></div>
+        <div class="hle-play-ring"><div class="hle-play-inner"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      </div>
+      <div class="hle-item" onclick="openV('2mQ3D-Fm2Q0')">
+        <img src="https://img.youtube.com/vi/2mQ3D-Fm2Q0/hqdefault.jpg" alt="" loading="lazy">
+        <div class="hle-overlay"></div>
+        <div class="hle-play-ring"><div class="hle-play-inner"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="sec sec-alt" id="services">
+  <div class="inner">
+    <div class="sec-head rev">
+      <div class="eyebrow">Services</div>
+      <h2 class="sec-title">What type of content do I edit?</h2>
+      <p class="sec-sub">Every format has its own mechanics. I work with all of them.</p>
+    </div>
+    <div class="srv-grid">
+      <div class="scard rev d1">
+        <span class="sicon">⚡</span>
+        <div class="stitle">Reels & Short Form</div>
+        <div class="sdesc">The format that generates the highest organic reach. Perfect pacing and maximum retention from the first 3 seconds that actually matter.</div>
+        <div class="stags"><span class="stag">TikTok</span><span class="stag">Reels</span><span class="stag">Shorts</span></div>
+      </div>
+      <div class="scard rev d2">
+        <span class="sicon">🎙️</span>
+        <div class="stitle">Long Form & Interviews</div>
+        <div class="sdesc">Authority content that builds your brand. Narrative editing with pacing designed to keep the viewer watching from start to finish.</div>
+        <div class="stags"><span class="stag">YouTube</span><span class="stag">Podcast</span><span class="stag">Interviews</span></div>
+      </div>
+      <div class="scard rev d3">
+        <span class="sicon">🎯</span>
+        <div class="stitle">Ads & Performance</div>
+        <div class="sdesc">Creatives that convert scroll into sales. Proven structure: hook → problem → solution → CTA. Built for metrics and ROAS.</div>
+        <div class="stags"><span class="stag">Meta Ads</span><span class="stag">YouTube Ads</span><span class="stag">Performance</span></div>
+      </div>
+      <div class="scard rev d4">
+        <span class="sicon">💰</span>
+        <div class="stitle">VSL & Launches</div>
+        <div class="sdesc">The video that activates your sales mechanism. Production matching what you charge. Every second engineered to lead the viewer to purchase.</div>
+        <div class="stags"><span class="stag">VSL</span><span class="stag">Launches</span><span class="stag">Webinars</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="sec">
+  <div class="inner">
+    <div class="sec-head rev">
+      <div class="eyebrow">Why choose me</div>
+      <h2 class="sec-title">Numbers that speak</h2>
+      <p class="sec-sub">I don't just edit well. I edit with strategy, understanding what drives the metrics.</p>
+    </div>
+    <div class="ben-grid">
+      <div class="bcard rev d1"><div class="bnum">10M+</div><div class="btitle">Views generated</div><div class="bdesc">Across content edited for creators and brands across multiple niches.</div></div>
+      <div class="bcard rev d2"><div class="bnum">50+</div><div class="btitle">Creators who trust</div><div class="bdesc">From creators and content producers to established agencies, throughout Latin America, the U.S., Dubai, Portugal, Bali, and all over the world!.</div></div>
+      <div class="bcard rev d3"><div class="bnum">∞</div><div class="btitle">Unlimited revisions</div><div class="bdesc">We work together until the video is exactly what you need.</div></div>
+      <div class="bcard rev d4"><div class="bnum">78%</div><div class="btitle">High retention</div><div class="bdesc">Each piece edited to maximize watch time and engagement metrics.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS — 6 categories with in-card carousels -->
+<section class="sec sec-alt" id="projects">
+  <div class="inner">
+    <div class="sec-head rev">
+      <div class="eyebrow">Work</div>
+      <h2 class="sec-title">Some of my best work</h2>
+      <p class="sec-sub">Different formats, different goals. One consistent quality standard.</p>
+    </div>
+    <div class="proj-grid">
+
+      <!-- 01 SHORT CONTENT - BASIC -->
+      <div class="pcard rev d1">
+        <div class="pcard-top">
+          <span class="pcard-num">01</span>
+          <span class="pcard-type">Short Content — Basic</span>
+        </div>
+        <div class="pcard-client">
+          <div class="pcard-avatar">S</div>
+          <div class="pcard-name">SHORT CONTENT</div>
+        </div>
+        <div class="pcard-desc">High-retention reels for content creators. Fast cuts, animated captions, and attention-grabbing hooks from the very first second.</div>
+        <div class="pvc-wrap" id="pvc1" data-idx="0">
+          <div class="pvc-track">
+            <div class="pvc-thumb" onclick="openV('YtsyC5BtYiI')">
+              <img src="https://img.youtube.com/vi/YtsyC5BtYiI/hqdefault.jpg" alt="" loading="lazy">
+              <div class="pthumb-play"><div class="ppbtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+            </div>
+            <div class="pvc-thumb" onclick="openV('m4ABXX46V3k')">
+              <img src="https://img.youtube.com/vi/m4ABXX46V3k/hqdefault.jpg" alt="" loading="lazy">
+              <div class="pthumb-play"><div class="ppbtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+            </div>
+            <div class="pvc-thumb" onclick="openV('WIHjQrb05y8')">
+              <img src="https://img.youtube.com/vi/WIHjQrb05y8/hqdefault.jpg" alt="" loading="lazy">
+              <div class="pthumb-play"><div class="ppbtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+            </div>
+            <div class="pvc-thumb" onclick="openV('yCp0CudsCyo')">
+              <img src="https://img.youtube.com/vi/yCp0CudsCyo/hqdefault.jpg" alt="" loading="lazy">
+              <div class="pthumb-play"><div class="ppbtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+            </div>
+            <div class="pvc-thumb" onclick="openV('NJRBL_b3UFw')">
+              <img src="https://img.youtube.com/vi/NJRBL_b3UFw/hqdefault.jpg" alt="" loading="lazy">
+              <div class="pthumb-play"><div class="ppbtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="pvc-controls">
+          <button class="car-btn" onclick="pvcMove('pvc1',-1)">←</button>
+          <button class="car-btn" onclick="pvcMove('pvc1',1)">→</button>
+        </div>
+        <div class="pcard-results">
+          <div class="presults-label">Results</div>
+          <div class="presults-grid">
+            <div><div class="presult-num">500K+</div><div class="presult-lbl">Views</div></div>
+            <div><div class="presult-num">85%+</div><div class="presult-lbl">Retention</div></div>
+            <div><div class="presult-num">12K+</div><div class="presult-lbl">Likes</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 02 SHORT CONTENT - PRO -->
+      <div class="pcard rev d2">
+        <div class="pcard-top">
+          <span class="pcard-num">02</span>
+          <span class="pcard-type">Short Content — Pro</span>
+        </div>
+        <div class="pcard-client">
+          <div class="pcard-avatar">P</div>
+          <div class="pcard-name">SHORT CONTENT PRO</div>
+        </div>
+        <div class="pcard-desc">Premium short-form content with advanced motion graphics, color grading, and branded transitions for authority positioning.</div>
+        <div class="pvc-wrap" id="pvc2" data-idx="0">
+          <div class="pvc-track">
+            <div class="pvc-thumb" onclick="openV('g24fLUx34ck')">
+              <img src="https://img.youtube.com/vi/g24fLUx34ck/hqdefault.jpg" alt="" loading="lazy">
+              <div class="pthumb-play"><div class="ppbtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+            </div>
+            <div class="pvc-thumb" onclick="openV('yMHs3yyY11I')">
+              <img src="https://img.youtube.com/vi/yMHs3yyY11I/hqdefault.jpg" alt="" loading="lazy">
+              <div class="pthumb-play"><div class="ppbtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+            </div>
+            <div class="pvc-thumb" onclick="openV('2mQ3D-Fm2Q0')">
+              <img src="https://img.youtube.com/vi/2mQ3D-Fm2Q0/hqdefault.jpg" alt="" loading="lazy">
+              <div class="pthumb-play"><div class="ppbtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+            </div>
+            <div class="pvc-thumb" onclick="openV('7PuVmMqxnao')">
+              <img src="https://img.youtube.com/vi/7PuVmMqxnao/maxresdefault.jpg" alt="" loading="lazy">
+              <div class="pthumb-play"><div class="ppbtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+            </div>
+            <div class="pvc-thumb" onclick="openV('drWLeQAIdIs')">
+              <img src="https://img.youtube.com/vi/drWLeQAIdIs/maxresdefault.jpg" alt="" loading="lazy">
+              <div class="pthumb-play"><div class="ppbtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+            </div>
+            <div class="pvc-thumb" onclick="openV('W842CPAiKlM')">
+              <img src="https://img.youtube.com/vi/W842CPAiKlM/hqdefault.jpg" alt="" loading="lazy">
+              <div class="pthumb-play"><div class="ppbtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+            </div>
+            <div class="pvc-thumb" onclick="openV('mknR3IBOWPk')">
+              <img src="https://img.youtube.com/vi/mknR3IBOWPk/hqdefault.jpg" alt="" loading="lazy">
+              <div class="pthumb-play"><div class="ppbtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="pvc-controls">
+          <button class="car-btn" onclick="pvcMove('pvc2',-1)">←</button>
+          <button class="car-btn" onclick="pvcMove('pvc2',1)">→</button>
+        </div>
+        <div class="pcard-results">
+          <div class="presults-label">Results</div>
+          <div class="presults-grid">
+            <div><div class="presult-num">2.3M+</div><div class="presult-lbl">Views</div></div>
+            <div><div class="presult-num">88%+</div><div class="presult-lbl">Retention</div></div>
+            <div><div class="presult-num">24K+</div><div class="presult-lbl">Likes</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 03 SHORT CONTENT - ADS -->
+      <div class="pcard rev d3">
+        <div class="pcard-top">
+          <span class="pcard-num">03</span>
+          <span class="pcard-type">Short Content — Ads</span>
+        </div>
+        <div class="pcard-client">
+          <div class="pcard-avatar">A</div>
+          <div class="pcard-name">SHORT ADS</div>
+        </div>
+        <div class="pcard-desc">Performance-driven short ads. Proven structure: hook → problem → solution → CTA. Built to stop the scroll and drive conversions at scale.</div>
+        <div class="pvc-wrap" id="pvc3" data-idx="0">
+          <div class="pvc-track">
+            <div class="pvc-thumb" onclick="openV('FLPJkpKsoC4')">
+              <img src="https://img.youtube.com/vi/FLPJkpKsoC4/hqdefault.jpg" alt="" loading="lazy">
+              <div class="pthumb-play"><div class="ppbtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+            </div>
+            <div class="pvc-thumb" onclick="openV('z0w-HZa3c3w')">
+              <img src="https://img.youtube.com/vi/z0w-HZa3c3w/hqdefault.jpg" alt="" loading="lazy">
+              <div class="pthumb-play"><div class="ppbtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+            </div>
+            <div class="pvc-thumb" onclick="openV('CLVe6Qsd8qE')">
+              <img src="https://img.youtube.com/vi/CLVe6Qsd8qE/maxresdefault.jpg" alt="" loading="lazy">
+              <div class="pthumb-play"><div class="ppbtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+            </div>
+            <div class="pvc-thumb" onclick="openV('7BSaqYaJWvk')">
+              <img src="https://img.youtube.com/vi/7BSaqYaJWvk/hqdefault.jpg" alt="" loading="lazy">
+              <div class="pthumb-play"><div class="ppbtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+            </div>
+            <div class="pvc-thumb" onclick="openV('VHy6IMpbjz4')">
+              <img src="https://img.youtube.com/vi/VHy6IMpbjz4/hqdefault.jpg" alt="" loading="lazy">
+              <div class="pthumb-play"><div class="ppbtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+            </div>
+            <div class="pvc-thumb" onclick="openV('lehdG5ztBOk')">
+              <img src="https://img.youtube.com/vi/lehdG5ztBOk/hqdefault.jpg" alt="" loading="lazy">
+              <div class="pthumb-play"><div class="ppbtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="pvc-controls">
+          <button class="car-btn" onclick="pvcMove('pvc3',-1)">←</button>
+          <button class="car-btn" onclick="pvcMove('pvc3',1)">→</button>
+        </div>
+        <div class="pcard-results">
+          <div class="presults-label">Results</div>
+          <div class="presults-grid">
+            <div><div class="presult-num">780K+</div><div class="presult-lbl">Reach</div></div>
+            <div><div class="presult-num">4.2%</div><div class="presult-lbl">CTR</div></div>
+            <div><div class="presult-num">High</div><div class="presult-lbl">Conversion</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 04 LONG CONTENT -->
+      <div class="pcard rev d4">
+        <div class="pcard-top">
+          <span class="pcard-num">04</span>
+          <span class="pcard-type">Long Content</span>
+        </div>
+        <div class="pcard-client">
+          <div class="pcard-avatar">L</div>
+          <div class="pcard-name">LONG CONTENT</div>
+        </div>
+        <div class="pcard-desc">Long-form interviews and podcasts. Narrative editing with dynamic pacing, B-roll, and captions to keep viewers engaged till the very end.</div>
+        <div class="phc-wrap" id="phc4" data-idx="0">
+          <div class="phc-track">
+            <div class="phc-thumb" onclick="openV('Hp7kqZGsgKE')">
+              <img src="https://img.youtube.com/vi/Hp7kqZGsgKE/maxresdefault.jpg" alt="" loading="lazy">
+              <div class="pthumb-play"><div class="ppbtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+            </div>
+            <div class="phc-thumb" onclick="openV('utOZNopvXN0')">
+              <img src="https://img.youtube.com/vi/utOZNopvXN0/maxresdefault.jpg" alt="" loading="lazy">
+              <div class="pthumb-play"><div class="ppbtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+            </div>
+            <div class="phc-thumb" onclick="openV('iJdJu4b-zk8')">
+              <img src="https://img.youtube.com/vi/iJdJu4b-zk8/maxresdefault.jpg" alt="" loading="lazy">
+              <div class="pthumb-play"><div class="ppbtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+            </div>
+            <div class="phc-thumb" onclick="openV('F3u5nH-f6oQ')">
+              <img src="https://img.youtube.com/vi/F3u5nH-f6oQ/maxresdefault.jpg" alt="" loading="lazy">
+              <div class="pthumb-play"><div class="ppbtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+            </div>
+            <div class="phc-thumb" onclick="openV('bMhFwiAo-mc')">
+              <img src="https://img.youtube.com/vi/bMhFwiAo-mc/maxresdefault.jpg" alt="" loading="lazy">
+              <div class="pthumb-play"><div class="ppbtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+            </div>
+            <div class="phc-thumb" onclick="openV('gmn4xphg2K0')">
+              <img src="https://img.youtube.com/vi/gmn4xphg2K0/maxresdefault.jpg" alt="" loading="lazy">
+              <div class="pthumb-play"><div class="ppbtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="phc-controls">
+          <span class="phc-count" id="phcc4">1 / 6</span>
+          <button class="car-btn" onclick="phcMove('phc4','phcc4',-1)">←</button>
+          <button class="car-btn" onclick="phcMove('phc4','phcc4',1)">→</button>
+        </div>
+        <div class="pcard-results">
+          <div class="presults-label">Results</div>
+          <div class="presults-grid">
+            <div><div class="presult-num">450K+</div><div class="presult-lbl">Views</div></div>
+            <div><div class="presult-num">72%+</div><div class="presult-lbl">Retention</div></div>
+            <div><div class="presult-num">2.1K+</div><div class="presult-lbl">Likes</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 05 VSL -->
+      <div class="pcard rev d1">
+        <div class="pcard-top">
+          <span class="pcard-num">05</span>
+          <span class="pcard-type">VSL</span>
+        </div>
+        <div class="pcard-client">
+          <div class="pcard-avatar">V</div>
+          <div class="pcard-name">VIDEO SALES LETTER</div>
+        </div>
+        <div class="pcard-desc">Video Sales Letters designed to convert. Every second is engineered to guide the prospect from curiosity to purchase decision.</div>
+        <div class="phc-wrap" id="phc5" data-idx="0">
+          <div class="phc-track">
+            <div class="phc-thumb" onclick="openV('eXdrYVigJCg')">
+              <img src="https://img.youtube.com/vi/eXdrYVigJCg/maxresdefault.jpg" alt="" loading="lazy">
+              <div class="pthumb-play"><div class="ppbtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+            </div>
+            <div class="phc-thumb" onclick="openV('bPyuUIMdZXE')">
+              <img src="https://img.youtube.com/vi/bPyuUIMdZXE/maxresdefault.jpg" alt="" loading="lazy">
+              <div class="pthumb-play"><div class="ppbtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+            </div>
+            <div class="phc-thumb" onclick="openV('ElC5sdmlTlI')">
+              <img src="https://img.youtube.com/vi/ElC5sdmlTlI/maxresdefault.jpg" alt="" loading="lazy">
+              <div class="pthumb-play"><div class="ppbtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+            </div>
+            <div class="phc-thumb" onclick="openV('X-POcZEfP4k')">
+              <img src="https://img.youtube.com/vi/X-POcZEfP4k/maxresdefault.jpg" alt="" loading="lazy">
+              <div class="pthumb-play"><div class="ppbtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="phc-controls">
+          <span class="phc-count" id="phcc5">1 / 4</span>
+          <button class="car-btn" onclick="phcMove('phc5','phcc5',-1)">←</button>
+          <button class="car-btn" onclick="phcMove('phc5','phcc5',1)">→</button>
+        </div>
+        <div class="pcard-results">
+          <div class="presults-label">Results</div>
+          <div class="presults-grid">
+            <div><div class="presult-num">38K+</div><div class="presult-lbl">Views</div></div>
+            <div><div class="presult-num">78%+</div><div class="presult-lbl">Completion</div></div>
+            <div><div class="presult-num">High</div><div class="presult-lbl">Conversion</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 06 TRAILERS & PODCAST -->
+      <div class="pcard rev d2">
+        <div class="pcard-top">
+          <span class="pcard-num">06</span>
+          <span class="pcard-type">Trailers &amp; Podcast</span>
+        </div>
+        <div class="pcard-client">
+          <div class="pcard-avatar">T</div>
+          <div class="pcard-name">TRAILERS &amp; PODCAST</div>
+        </div>
+        <div class="pcard-desc">Brand trailers and podcast episode edits. Cinematic quality that elevates your authority and establishes a strong visual identity.</div>
+        <div class="phc-wrap" id="phc6" data-idx="0">
+          <div class="phc-track">
+            <div class="phc-thumb" onclick="openV('T0ip3l274d4')">
+              <img src="https://img.youtube.com/vi/T0ip3l274d4/maxresdefault.jpg" alt="" loading="lazy">
+              <div class="pthumb-play"><div class="ppbtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+            </div>
+            <div class="phc-thumb" onclick="openV('4xxl7tV1TQE')">
+              <img src="https://img.youtube.com/vi/4xxl7tV1TQE/maxresdefault.jpg" alt="" loading="lazy">
+              <div class="pthumb-play"><div class="ppbtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+            </div>
+            <div class="phc-thumb" onclick="openV('cRmh_VzQ8r0')">
+              <img src="https://img.youtube.com/vi/cRmh_VzQ8r0/maxresdefault.jpg" alt="" loading="lazy">
+              <div class="pthumb-play"><div class="ppbtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+            </div>
+            <div class="phc-thumb" onclick="openV('Fne2Ru4Rf7k')">
+              <img src="https://img.youtube.com/vi/Fne2Ru4Rf7k/maxresdefault.jpg" alt="" loading="lazy">
+              <div class="pthumb-play"><div class="ppbtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+            </div>
+            <div class="phc-thumb" onclick="openV('xnEDAwh842c')">
+              <img src="https://img.youtube.com/vi/xnEDAwh842c/maxresdefault.jpg" alt="" loading="lazy">
+              <div class="pthumb-play"><div class="ppbtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+            </div>
+            <div class="phc-thumb" onclick="openV('NKp4N7ZOj48')">
+              <img src="https://img.youtube.com/vi/NKp4N7ZOj48/maxresdefault.jpg" alt="" loading="lazy">
+              <div class="pthumb-play"><div class="ppbtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="phc-controls">
+          <span class="phc-count" id="phcc6">1 / 6</span>
+          <button class="car-btn" onclick="phcMove('phc6','phcc6',-1)">←</button>
+          <button class="car-btn" onclick="phcMove('phc6','phcc6',1)">→</button>
+        </div>
+        <div class="pcard-results">
+          <div class="presults-label">Results</div>
+          <div class="presults-grid">
+            <div><div class="presult-num">386K+</div><div class="presult-lbl">Views</div></div>
+            <div><div class="presult-num">82%+</div><div class="presult-lbl">Retention</div></div>
+            <div><div class="presult-num">3.5K+</div><div class="presult-lbl">Likes</div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec" id="faq">
+  <div class="inner">
+    <div class="sec-head rev">
+      <div class="eyebrow">Frequently asked questions</div>
+      <h2 class="sec-title">Everything you need to know</h2>
+    </div>
+    <div class="faq-wrap">
+
+      <div class="fi">
+        <button class="fq" onclick="toggleFaq(this)">What platforms do you edit videos for?<span class="fico">+</span></button>
+        <div class="fa"><div class="fa-in">I specialize in short-form content for TikTok, Instagram Reels, and YouTube Shorts, as well as long-form videos for YouTube, podcasts, and interviews. Each video is specifically formatted for its target platform, ensuring optimal quality and performance.</div></div>
+      </div>
+
+      <div class="fi">
+        <button class="fq" onclick="toggleFaq(this)">How does the editing process work?<span class="fico">+</span></button>
+        <div class="fa"><div class="fa-in">Once you send me your footage, I review the content, confirm the style you're looking for, and get to work. You receive the first draft within a few days, and we include revisions to ensure the final video matches exactly your vision.</div></div>
+      </div>
+
+      <div class="fi">
+        <button class="fq" onclick="toggleFaq(this)">Can you add subtitles, music, and effects?<span class="fico">+</span></button>
+        <div class="fa"><div class="fa-in">Yes! All edits include subtitles, licensed background music, sound effects, and custom animated graphics when needed. I use proven editing techniques to increase watch time and engagement while maintaining your brand's style and tone.</div></div>
+      </div>
+
+      <div class="fi">
+        <button class="fq" onclick="toggleFaq(this)">What's the turnaround time?<span class="fico">+</span></button>
+        <div class="fa"><div class="fa-in">It depends on the project, but typically short edits are delivered in 2–4 days and longer pieces in 5–7 days. Need it faster? I also offer rush delivery options on request.</div></div>
+      </div>
+
+      <div class="fi">
+        <button class="fq" onclick="toggleFaq(this)">Do you offer content planning or strategy services?<span class="fico">+</span></button>
+        <div class="fa"><div class="fa-in">Yes. I offer optional assistance on content structure, hook ideas, pacing, and publishing schedules to optimize your video performance. Whether you're just starting or looking to scale, I'm here to guide you.</div></div>
+      </div>
+
+      <div class="fi">
+        <button class="fq" onclick="toggleFaq(this)">What if I'm not satisfied with the first edit?<span class="fico">+</span></button>
+        <div class="fa"><div class="fa-in">No worries — revisions are included in all projects. You'll have the opportunity to give feedback and I'll refine the video until it's exactly what you had in mind. My goal is that you're 100% satisfied with the result.</div></div>
+      </div>
+
+      <div class="fi">
+        <button class="fq" onclick="toggleFaq(this)">Can you work with existing brand guidelines?<span class="fico">+</span></button>
+        <div class="fa"><div class="fa-in">Absolutely. Whether you have specific fonts, color palettes, logos, or animation styles, I make sure every edit aligns with your brand identity. If you don't have a defined style yet, I can help you create one that fits your content perfectly.</div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA — SPLIT LAYOUT -->
+<section class="cta-sec">
+  <div class="inner">
+    <div class="cta-card rev">
+      <div class="cta-left">
+        <div class="cta-lbl">Ready to start?</div>
+        <h2 class="cta-h">Ready to<br><span class="gtext">10x</span> your views?</h2>
+        <p class="cta-p">Turn your content into videos that stop the scroll, grow your audience, and drive more sales. Let's talk and make it happen.</p>
+        <div class="cta-btns">
+          <a href="https://wa.link/g67oew" class="btn btn-wa" target="_blank" rel="noopener">💬 Message me on WhatsApp</a>
+          <a href="mailto:444agusgonzalez@gmail.com" class="btn btn-mail">✉️ Send an email</a>
+        </div>
+      </div>
+      <div class="cta-right">
+        <div class="cta-mosaic">
+          <div class="cmv" onclick="openV('7PuVmMqxnao')">
+            <img src="https://img.youtube.com/vi/7PuVmMqxnao/maxresdefault.jpg" alt="" loading="lazy">
+            <div class="cmv-play"><div class="cmv-pb"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+          </div>
+          <div class="cmv" onclick="openV('utOZNopvXN0')">
+            <img src="https://img.youtube.com/vi/utOZNopvXN0/maxresdefault.jpg" alt="" loading="lazy">
+            <div class="cmv-play"><div class="cmv-pb"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+          </div>
+          <div class="cmv" onclick="openV('drWLeQAIdIs')">
+            <img src="https://img.youtube.com/vi/drWLeQAIdIs/maxresdefault.jpg" alt="" loading="lazy">
+            <div class="cmv-play"><div class="cmv-pb"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+          </div>
+          <div class="cmv" onclick="openV('CLVe6Qsd8qE')">
+            <img src="https://img.youtube.com/vi/CLVe6Qsd8qE/maxresdefault.jpg" alt="" loading="lazy">
+            <div class="cmv-play"><div class="cmv-pb"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+          </div>
+          <div class="cmv" onclick="openV('ElC5sdmlTlI')">
+            <img src="https://img.youtube.com/vi/ElC5sdmlTlI/maxresdefault.jpg" alt="" loading="lazy">
+            <div class="cmv-play"><div class="cmv-pb"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+          </div>
+          <div class="cmv" onclick="openV('T0ip3l274d4')">
+            <img src="https://img.youtube.com/vi/T0ip3l274d4/maxresdefault.jpg" alt="" loading="lazy">
+            <div class="cmv-play"><div class="cmv-pb"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo">Agus<br><em>González</em></div>
+      <a href="https://wa.link/g67oew" class="footer-cta" target="_blank" rel="noopener">
+        Let's talk
+        <span class="footer-cta-arrow">↗</span>
+      </a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Contact</div>
+      <a href="mailto:444agusgonzalez@gmail.com">444agusgonzalez@gmail.com</a>
+      <div class="footer-socials">
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/soyagusg/" target="_blank" rel="noopener" class="fsoc" title="Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        <!-- LinkedIn -->
+        <a href="https://www.linkedin.com/in/agustingonzalezz/" target="_blank" rel="noopener" class="fsoc" title="LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <!-- WhatsApp -->
+        <a href="https://wa.link/g67oew" target="_blank" rel="noopener" class="fsoc" title="WhatsApp">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Quick links</div>
+      <a href="#work">Work</a>
+      <a href="#services">Services</a>
+      <a href="#projects">Projects</a>
+      <a href="#faq">FAQ</a>
+      <a href="https://wa.link/g67oew" target="_blank" rel="noopener">Let's talk</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Agustín González · Video Editor · WorldWide</span>
+    <span class="footer-copy" style="opacity:.5;">All rights reserved.</span>
+  </div>
+</footer>
+
+<!-- VIDEO MODAL -->
+<div class="modal" id="modal" onclick="closeV(event)">
+  <div class="modal-inner">
+    <div class="modal-close" onclick="closeV(null,true)">← Close</div>
+    <div class="modal-frame" id="mframe"></div>
+  </div>
+</div>
+
+<script>
+  /* NAV */
+  function toggleNav() { document.getElementById('mobnav').classList.toggle('open'); }
+  function closeNav()  { document.getElementById('mobnav').classList.remove('open'); }
+  window.addEventListener('scroll', () => {
+    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40);
+  }, {passive:true});
+
+  /* HIGHLIGHTED EDITS CAROUSEL */
+  (function() {
+    const track   = document.getElementById('hleTrack');
+    const countEl = document.getElementById('hleCount');
+    const items   = track.querySelectorAll('.hle-item');
+    const total   = items.length;
+    let idx = 0;
+
+    function getVisible() {
+      const w = window.innerWidth;
+      if (w < 560) return 2;
+      if (w < 900) return 3;
+      return 5;
+    }
+
+    function render() {
+      const itemW = 200 + 6; /* flex: 0 0 200px + gap */
+      track.style.transform = `translateX(${-idx * itemW}px)`;
+      countEl.textContent = '(' + String(idx + 1).padStart(2, '0') + ')';
+    }
+
+    window.hleMove = function(dir) {
+      const vis = getVisible();
+      const max = Math.max(0, total - vis);
+      idx = Math.max(0, Math.min(idx + dir, max));
+      render();
+    };
+
+    window.addEventListener('resize', () => {
+      const vis = getVisible();
+      idx = Math.min(idx, Math.max(0, total - vis));
+      render();
+    }, {passive:true});
+  })();
+
+  /* VERTICAL CAROUSEL — short content (3 visible) */
+  function pvcMove(id, dir) {
+    const wrap   = document.getElementById(id);
+    const track  = wrap.querySelector('.pvc-track');
+    const thumbs = track.querySelectorAll('.pvc-thumb');
+    const total  = thumbs.length;
+    let idx = parseInt(wrap.dataset.idx) || 0;
+    const max = Math.max(0, total - 3);
+    idx = Math.max(0, Math.min(idx + dir, max));
+    wrap.dataset.idx = idx;
+    const thumbW = thumbs[0].offsetWidth + 8;
+    track.style.transform = `translateX(${-idx * thumbW}px)`;
+  }
+
+  /* HORIZONTAL CAROUSEL — long form / VSL / trailers (1 at a time) */
+  function phcMove(id, countId, dir) {
+    const wrap   = document.getElementById(id);
+    const track  = wrap.querySelector('.phc-track');
+    const thumbs = track.querySelectorAll('.phc-thumb');
+    const total  = thumbs.length;
+    let idx = parseInt(wrap.dataset.idx) || 0;
+    idx = Math.max(0, Math.min(idx + dir, total - 1));
+    wrap.dataset.idx = idx;
+    const thumbW = thumbs[0].offsetWidth;
+    track.style.transform = `translateX(${-idx * thumbW}px)`;
+    if (countId) document.getElementById(countId).textContent = `${idx + 1} / ${total}`;
+  }
+
+  /* VIDEO MODAL */
+  function openV(id) {
+    document.getElementById('mframe').innerHTML =
+      `<iframe src="https://www.youtube.com/embed/${id}?autoplay=1&rel=0" allowfullscreen allow="autoplay; encrypted-media"></iframe>`;
+    document.getElementById('modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeV(e, force) {
+    if (force || (e && e.target === document.getElementById('modal'))) {
+      document.getElementById('modal').classList.remove('open');
+      document.getElementById('mframe').innerHTML = '';
+      document.body.style.overflow = '';
+    }
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeV(null, true); });
+
+  /* FAQ ACCORDION */
+  function toggleFaq(btn) {
+    const item    = btn.closest('.fi');
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.fi.open').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  }
+
+  /* SCROLL REVEAL */
+  const ro = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); ro.unobserve(e.target); } });
+  }, { threshold: 0.08, rootMargin: '0px 0px -24px 0px' });
+  document.querySelectorAll('.rev').forEach(el => ro.observe(el));
+
+  /* HERO ENTRANCE */
+  (function() {
+    const els = document.querySelectorAll('.hero-eyebrow,.hero h1,.hero-sub,.hero-chips,.hero-actions,.hero-img-side');
+    els.forEach((el, i) => {
+      el.style.cssText = `opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease;transition-delay:${i * .13}s`;
+      setTimeout(() => { el.style.opacity = '1'; el.style.transform = 'translateY(0)'; }, 80);
+    });
+  })();
+</script>
+</body>
+</html>
